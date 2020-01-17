@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class AsteroidMap
 {
-  private List<IMapPoint> Asteroids;
+  public List<IMapPoint> Asteroids;
   private Dictionary<string, Line> Lines;
 
   public AsteroidMap(string mapData)
@@ -21,23 +22,51 @@ class AsteroidMap
       for(var j =0; j < rows[i].Length; j++)    
       {
         if(rows[i][j] == '#')
-          Asteroids.Add(new Asteroid(i, j));
+          Asteroids.Add(new Asteroid(j, i));
       }
     }
 
     GenerateLines();
 
-    foreach(var a in Asteroids)
+    foreach(var l in Lines.Values)
+    {
+      Console.WriteLine(l.Id);
+      foreach(var a in l.AsteroidsOnLine.Values)
+      {
+        Console.WriteLine(a.X + " -- " + a.Y);
+      }
+    }
+
+    // Asteroids.Sort((a, b) => a.X.CompareTo(b.X));
+
+    /*foreach(var a in Asteroids)
     {      
       Console.WriteLine(a.X + ":" + a.Y + " = " + a.OnLines.Count);
-    }
+      if(true && a.X == 8 && a.Y == 9)
+      {        
+        var sortedLines = a.OnLines.Values.ToList();
+        sortedLines.Sort((i1, i2) => i1.Id.CompareTo(i2.Id));
+        foreach(var l in sortedLines)
+        {
+          Console.WriteLine(l.Id);
+          foreach(var ast in l.AsteroidsOnLine)
+            Console.Write(ast.Key + " ; ");
+          Console.WriteLine("");
+        }
+      }
+    }*/
+  }
+
+  public int GetMaxDetectable()
+  {
+    return Asteroids.Max(a => a.OnLines.Count);
   }
 
   public void GenerateLines()
   {
     for(var i = 0; i < Asteroids.Count; i++)
     {
-      for(var j = i; j < Asteroids.Count; j++)
+      for(var j = i + 1; j < Asteroids.Count; j++)
       {
         var line = GetLineAndAddTwoPoints(Asteroids[i], Asteroids[j]);
       }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 class Line
 {
     public string Id { get; set; }
-    private Dictionary<string, IMapPoint> AsteroidsOnLine { get; set; }
+    public Dictionary<string, IMapPoint> AsteroidsOnLine { get; set; }
 
     public Line(string id)
     {
@@ -14,12 +14,22 @@ class Line
 
     public static string GetLineId(int pointOneX, int pointOneY, int pointTwoX, int pointTwoY)
     {
-      var xDistance = pointOneX - pointTwoX;
-      var yDistance = pointOneY - pointTwoY;
+      var xDistance = Math.Abs(pointOneX - pointTwoX);
+      var yDistance = Math.Abs(pointOneY - pointTwoY);
 
-      var gradient = xDistance == 0 ? 1 : yDistance == 0 ? 0 : yDistance / xDistance;
-      var yIntercept = gradient == 1 ? pointOneY : pointOneY - ( gradient * pointOneX );
-      var xIntercept = gradient == 0 ? pointOneX : ( 0 - yIntercept ) / gradient;
+      if(xDistance == 0)
+      {
+        return ":" + pointOneX;
+      }
+
+      if(yDistance == 0)
+      {
+        return pointOneY + ":";
+      }
+
+      float gradient = yDistance / xDistance;
+      float yIntercept = pointOneY - ( gradient * pointOneX );
+      float xIntercept = ( 0 - yIntercept ) / gradient;
 
       return xIntercept + ":" + yIntercept;
     }
