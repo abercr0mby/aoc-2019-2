@@ -27,7 +27,7 @@ class DayTen
   var maxDetectable = map.GetMaxDetectable();
   if(maxDetectable != 33)
   {
-    //throw new System.Exception(maxDetectable + " should be 33");
+    throw new System.Exception(maxDetectable + " should be 33");
   }
   else
   {
@@ -50,7 +50,7 @@ class DayTen
   maxDetectable = map.GetMaxDetectable();
   if(maxDetectable != 35)
   {
-    //throw new System.Exception(maxDetectable + " should be 35");
+    throw new System.Exception(maxDetectable + " should be 35");
   }
   else
   {

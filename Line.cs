@@ -28,8 +28,8 @@ class Line
       }
 
       float gradient = yDistance / xDistance;
-      float yIntercept = pointOneY - ( gradient * pointOneX );
-      float xIntercept = ( 0 - yIntercept ) / gradient;
+      float yIntercept = pointOneX == 0 ? pointOneY : pointOneX == 0 ? pointOneY : pointOneY - ( gradient * pointOneX );
+      float xIntercept = pointOneY == 0 ? pointOneX : pointTwoY == 0 ? pointTwoX : ( 0 - yIntercept ) / gradient;
 
       return xIntercept + ":" + yIntercept;
     }
