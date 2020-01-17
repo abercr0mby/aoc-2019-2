@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 
 class Line
 {
-    private XAxisIntercept int[2] { get; set; };
-    private YAxisIntercept int[2] { get; set; };
+    private int[] XAxisIntercept { get; set; }
+    private int[] YAxisIntercept { get; set; }
     private List<Asteroid> Asteroids { get; set; }
 
-    public Line(int[2] xAxisIntercept, int[2] yAxisIntercept)
+    public Line(int[] xAxisIntercept, int[] yAxisIntercept)
     {
       XAxisIntercept = xAxisIntercept;
       YAxisIntercept = yAxisIntercept;
-      Asteroids = new List<Asteroids>();
+      Asteroids = new List<Asteroid>();
     }
 }
