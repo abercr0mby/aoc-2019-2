@@ -1,10 +1,25 @@
 using System;
 using System.Collections.Generic;
 
-class Asteroid
+class Asteroid : IMapPoint
 {
-  private int x { get; set; }
-  private int y { get; set; }
+  public int X { get; set; }
+  public int Y { get; set; }
 
-  private List<Line> Lines { get; set; }
+  public Dictionary<string, Line> OnLines { get; set; }
+
+  public Asteroid(int x, int y)
+  {
+    X = x;
+    Y = y;
+    OnLines = new Dictionary<string, Line>();
+  }
+
+  public void AddToLine(Line line)
+  {
+    try
+    {
+      OnLines.Add(line.Id, line);
+    } catch(Exception){}
+  }  
 }
