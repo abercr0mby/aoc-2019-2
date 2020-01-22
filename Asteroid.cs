@@ -6,6 +6,8 @@ class Asteroid : IMapPoint
   public int X { get; set; }
   public int Y { get; set; }
 
+  public int VisiblePoints { get; set; }
+
   public Dictionary<string, Line> OnLines { get; set; }
 
   public Asteroid(int x, int y)
@@ -22,4 +24,12 @@ class Asteroid : IMapPoint
       OnLines.Add(line.Id, line);
     } catch(Exception){}
   }  
+
+  public void DetermineVisiblePoints()
+  {
+    foreach(var l in OnLines)
+    {
+      VisiblePoints += l.Value.DetermineVisibleAsteroids(this);
+    }
+  }
 }

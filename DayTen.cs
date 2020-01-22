@@ -5,13 +5,36 @@ class DayTen
   public int RunTestsAndGetResultPartOne() 
   {
     RunTestsPartOne();
-    return 0;
+var map = new AsteroidMap(
+@".###.###.###.#####.#
+#####.##.###..###..#
+.#...####.###.######
+######.###.####.####
+#####..###..########
+#.##.###########.#.#
+##.###.######..#.#.#
+.#.##.###.#.####.###
+##..#.#.##.#########
+###.#######.###..##.
+###.###.##.##..####.
+.##.####.##########.
+#######.##.###.#####
+#####.##..####.#####
+##.#.#####.##.#.#..#
+###########.#######.
+#.##..#####.#####..#
+#####..#####.###.###
+####.#.############.
+####.#.#.##########."
+);
+
+  return map.GetMaxDetectable();
   }
 
   public void RunTestsPartOne () 
   {
-/*
-    var map = new AsteroidMap(
+
+var map = new AsteroidMap(
 @"......#.#.
 #..#.#....
 ..#######.
@@ -34,7 +57,7 @@ class DayTen
     Console.WriteLine("Day ten test one passed");
   }
 
-    map = new AsteroidMap(
+   map = new AsteroidMap(
 @"#.#...#.#.
 .###....#.
 .#....#...
@@ -56,9 +79,8 @@ class DayTen
   {
     Console.WriteLine("Day ten test two passed");
   }
-  */
 
-    var map = new AsteroidMap(
+    map = new AsteroidMap(
 @".#..#
 .....
 #####
@@ -66,7 +88,7 @@ class DayTen
 ...##"
 );
 
-    var maxDetectable = map.GetMaxDetectable();
+    maxDetectable = map.GetMaxDetectable();
     if(maxDetectable != 8)
     {
       throw new System.Exception(maxDetectable + " should be 8");
@@ -74,6 +96,62 @@ class DayTen
     else
     {
       Console.WriteLine("Day ten test zero passed");
+    }
+
+    map = new AsteroidMap(
+@".#..#..###
+####.###.#
+....###.#.
+..###.##.#
+##.##.#.#.
+....###..#
+..#.#..#.#
+#..#.#.###
+.##...##.#
+.....#.#.."
+);
+
+    maxDetectable = map.GetMaxDetectable();
+    if(maxDetectable != 41)
+    {
+      throw new System.Exception(maxDetectable + " should be 41");
+    }
+    else
+    {
+      Console.WriteLine("Day ten test three passed");
+    }
+
+    map = new AsteroidMap(
+@".#..##.###...#######
+##.############..##.
+.#.######.########.#
+.###.#######.####.#.
+#####.##.#.##.###.##
+..#####..#.#########
+####################
+#.####....###.#.#.##
+##.#################
+#####.##.###..####..
+..######..##.#######
+####.##.####...##..#
+.#####..#.######.###
+##...#.##########...
+#.##########.#######
+.####.#.###.###.#.##
+....##.##.###..#####
+.#.#.###########.###
+#.#.#.#####.####.###
+###.##.####.##.#..##"
+);
+
+    maxDetectable = map.GetMaxDetectable();
+    if(maxDetectable != 210)
+    {
+      throw new System.Exception(maxDetectable + " should be 210");
+    }
+    else
+    {
+      Console.WriteLine("Day ten test three passed");
     }
 
   }
