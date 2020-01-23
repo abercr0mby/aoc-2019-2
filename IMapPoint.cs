@@ -6,15 +6,11 @@ interface IMapPoint
   int X { get; set; }
   int Y { get; set; }
 
-  int VisiblePoints { get; set; }
-
   HashSet<double> Angles { get; set; }
 
-  Dictionary<string, Line> OnLines { get; set; }
+  double DistanceFromPoint { get; set; }
 
-  void AddToLine(Line line);  
-
-  void DetermineVisiblePoints();
+  double AngleFromPoint { get; set; }
 
   void GenerateLosVectorTo(IMapPoint point);
 }

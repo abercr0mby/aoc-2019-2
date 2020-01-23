@@ -2,6 +2,14 @@ using System;
 class DayTen
 {
 
+  public int RunTestsAndGetResultPartTwo() 
+  {
+    RunTestsPartTwo();
+    return 0;
+  }
+
+
+
   public int RunTestsAndGetResultPartOne() 
   {
     RunTestsPartOne();
@@ -30,6 +38,45 @@ var map = new AsteroidMap(
 
   return map.GetMaxDetectable();
   }
+
+  public void RunTestsPartTwo () 
+  {
+
+var map = new AsteroidMap(
+@".#..##.###...#######
+##.############..##.
+.#.######.########.#
+.###.#######.####.#.
+#####.##.#.##.###.##
+..#####..#.#########
+####################
+#.####....###.#.#.##
+##.#################
+#####.##.###..####..
+..######..##.#######
+####.##.####...##..#
+.#####..#.######.###
+##...#.##########...
+#.##########.#######
+.####.#.###.###.#.##
+....##.##.###..#####
+.#.#.###########.###
+#.#.#.#####.####.###
+###.##.####.##.#..##"
+);
+
+  var maxDetectable = map.GetMaxDetectable();
+  if(maxDetectable != 33)
+  {
+    throw new System.Exception(maxDetectable + " should be 33");
+  }
+  else
+  {
+    Console.WriteLine("Day ten test one passed");
+  }
+}
+
+
 
   public void RunTestsPartOne () 
   {
