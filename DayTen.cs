@@ -151,7 +151,7 @@ var map = new AsteroidMap(
     }
     else
     {
-      Console.WriteLine("Day ten test three passed");
+      Console.WriteLine("Day ten test four passed");
     }
 
   }

@@ -56,9 +56,9 @@ class Line
       double yIntercept;
       double xIntercept;
 
-      double xDistance = pointOneX - pointTwoX;
-      double yDistance = pointOneY - pointTwoY;
-      string gradientId = xDistance == 0 ? "H" : Math.Abs(yDistance / xDistance).ToString();
+      float xDistance = pointOneX - pointTwoX;
+      float yDistance = pointOneY - pointTwoY;
+      string gradientId = xDistance == 0 ? "H" : Math.Round(Math.Abs(yDistance / xDistance), 2).ToString();
 
       if (pointOneX == 0 && pointOneY == 0)
         return pointOneX + ":" + pointOneY + ":" + gradientId;
@@ -76,25 +76,25 @@ class Line
         return pointOneY + ":" + ":" + gradientId;
       }
 
-      double gradient = yDistance / xDistance;
+      float gradient = yDistance / xDistance;
       yIntercept = pointOneX == 0 ? pointOneY : pointTwoX == 0 ? pointTwoY : 0;
       xIntercept = pointOneY == 0 ? pointOneX : pointTwoY == 0 ? pointTwoX : 0;
 
       if (yIntercept == 0)
       {
-          var yValue = pointOneY != 0 ? pointOneY : pointTwoY;
-          yIntercept = pointOneY - ( gradient * pointOneX );
+          //var yValue = pointOneY != 0 ? pointOneY : pointTwoY;
+          yIntercept = pointOneY - Math.Round( gradient * pointOneX, 2 );
       }
 
       if (xIntercept == 0)
       {
-          xIntercept = ( 0 - yIntercept ) / gradient;    
+          xIntercept = Math.Round(( 0 - yIntercept ) / gradient, 2);
       }
 
       return xIntercept + ":" + yIntercept + ":" + gradient;
     }
 
-    public void AddPoint( IMapPoint point )    
+    public void AddPoint( IMapPoint point )
     {
       try
       {

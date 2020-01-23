@@ -41,7 +41,7 @@ class AsteroidMap
 
     foreach(var a in Asteroids)
     {      
-      Console.WriteLine(a.X + ":" + a.Y + " = " + a.VisiblePoints);
+      //Console.WriteLine(a.X + ":" + a.Y + " = " + a.VisiblePoints);
 /*       if(true && a.X == 5 && a.Y == 8)
       { 
         Console.WriteLine(Asteroids.Count);
@@ -73,7 +73,7 @@ class AsteroidMap
     {
       for(var j = i + 1; j < Asteroids.Count; j++)
       {
-        var line = GetLineAndAddTwoPoints(Asteroids[i], Asteroids[j]);
+        GetLineAndAddTwoPoints(Asteroids[i], Asteroids[j]);
       }
     }
 
