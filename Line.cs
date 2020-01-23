@@ -58,7 +58,7 @@ class Line
 
       float xDistance = pointOneX - pointTwoX;
       float yDistance = pointOneY - pointTwoY;
-      string gradientId = xDistance == 0 ? "H" : Math.Round(Math.Abs(yDistance / xDistance), 2).ToString();
+      string gradientId = xDistance == 0 ? "H" : Math.Round(Math.Abs(yDistance / xDistance), 1).ToString();
 
       if (pointOneX == 0 && pointOneY == 0)
         return pointOneX + ":" + pointOneY + ":" + gradientId;

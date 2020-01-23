@@ -26,7 +26,8 @@ class AsteroidMap
       }
     }
 
-    GenerateLines();
+    // GenerateLines();
+    GenerateLosVectors();
 
     foreach(var l in Lines.Values)
     {
@@ -64,8 +65,22 @@ class AsteroidMap
 
   public int GetMaxDetectable()
   {
-    return Asteroids.Max(a => a.VisiblePoints);
+    //return Asteroids.Max(a => a.VisiblePoints);
+    return Asteroids.Max(a => a.Angles.Count);
   }
+
+  public void GenerateLosVectors()
+  {
+    for(var i = 0; i < Asteroids.Count; i++)
+    {
+      for(var j = 0; j < Asteroids.Count; j++)
+      {
+        if ( i == j )
+          continue;
+        Asteroids[i].GenerateLosVectorTo(Asteroids[j]);
+      }
+    }
+  }  
 
   public void GenerateLines()
   {
