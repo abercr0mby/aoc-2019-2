@@ -53,11 +53,11 @@ class Line
 
     public static string GetLineId(int pointOneX, int pointOneY, int pointTwoX, int pointTwoY)
     {
-      float yIntercept;
-      float xIntercept;
+      double yIntercept;
+      double xIntercept;
 
-      float xDistance = pointOneX - pointTwoX;
-      float yDistance = pointOneY - pointTwoY;
+      double xDistance = pointOneX - pointTwoX;
+      double yDistance = pointOneY - pointTwoY;
       string gradientId = xDistance == 0 ? "H" : Math.Abs(yDistance / xDistance).ToString();
 
       if (pointOneX == 0 && pointOneY == 0)
@@ -76,7 +76,7 @@ class Line
         return pointOneY + ":" + ":" + gradientId;
       }
 
-      float gradient = yDistance / xDistance;
+      double gradient = yDistance / xDistance;
       yIntercept = pointOneX == 0 ? pointOneY : pointTwoX == 0 ? pointTwoY : 0;
       xIntercept = pointOneY == 0 ? pointOneX : pointTwoY == 0 ? pointTwoX : 0;
 
