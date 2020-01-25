@@ -32,6 +32,11 @@ class AsteroidMap
     return Asteroids.Max(a => a.Angles.Count);
   }
 
+public void GenerateVectorsToALlOtherAsteroidsFrom(IMapPoint asteroid)
+{
+  asteroid.GenerateVectorsToAllOtherPoints(Asteroids);
+}
+
   public void GenerateLosVectors()
   {
     for(var i = 0; i < Asteroids.Count; i++)

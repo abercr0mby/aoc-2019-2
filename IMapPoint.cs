@@ -12,5 +12,9 @@ interface IMapPoint
 
   double AngleFromPoint { get; set; }
 
+  List<IMapPoint> Points {get; set;}
+
+  void GenerateVectorsToAllOtherPoints(List<IMapPoint> points);
+
   void GenerateLosVectorTo(IMapPoint point);
 }

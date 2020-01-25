@@ -8,8 +8,6 @@ class DayTen
     return 0;
   }
 
-
-
   public int RunTestsAndGetResultPartOne() 
   {
     RunTestsPartOne();
