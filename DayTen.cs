@@ -27,7 +27,8 @@ var map = new AsteroidMap(
 ####.#.############.
 ####.#.#.##########."
 );
-    var lastBlasted = map.BlastXAsteroids(11, 13, 200);
+    var laserStation = map.GetMaxDetector();
+    var lastBlasted = map.BlastXAsteroids(laserStation.X, laserStation.Y, 200);
     return (lastBlasted.X * 100) + lastBlasted.Y;
   }
 

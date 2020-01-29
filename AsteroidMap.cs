@@ -39,6 +39,11 @@ class AsteroidMap
     return Asteroids.Max(a => a.Angles.Count);
   }
 
+  public IMapPoint GetMaxDetector()
+  {
+    return Asteroids.OrderByDescending(a => a.Angles.Count).FirstOrDefault();
+  }
+
   public void GenerateLosVectors()
   {
     for(var i = 0; i < Asteroids.Count; i++)
