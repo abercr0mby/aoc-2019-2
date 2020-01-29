@@ -5,7 +5,30 @@ class DayTen
   public int RunTestsAndGetResultPartTwo() 
   {
     RunTestsPartTwo();
-    return 0;
+var map = new AsteroidMap(
+@".###.###.###.#####.#
+#####.##.###..###..#
+.#...####.###.######
+######.###.####.####
+#####..###..########
+#.##.###########.#.#
+##.###.######..#.#.#
+.#.##.###.#.####.###
+##..#.#.##.#########
+###.#######.###..##.
+###.###.##.##..####.
+.##.####.##########.
+#######.##.###.#####
+#####.##..####.#####
+##.#.#####.##.#.#..#
+###########.#######.
+#.##..#####.#####..#
+#####..#####.###.###
+####.#.############.
+####.#.#.##########."
+);
+    var lastBlasted = map.BlastXAsteroids(11, 13, 200);
+    return (lastBlasted.X * 100) + lastBlasted.Y;
   }
 
   public int RunTestsAndGetResultPartOne() 
@@ -63,14 +86,37 @@ var map = new AsteroidMap(
 ###.##.####.##.#..##"
 );
 
-  var maxDetectable = map.GetMaxDetectable();
-  if(maxDetectable != 33)
+  var lastBlasted = map.BlastXAsteroids(11, 13, 199);
+
+  if(lastBlasted.X != 9 || lastBlasted.Y != 6)
   {
-    throw new System.Exception(maxDetectable + " should be 33");
+    throw new System.Exception(lastBlasted.X + ":" + lastBlasted.Y + " - " + lastBlasted.AngleFromPoint + " should be 8:2");
   }
   else
   {
-    Console.WriteLine("Day ten test one passed");
+    Console.WriteLine("Day ten part two test one passed");
+  }
+
+  lastBlasted = map.BlastXAsteroids(11, 13, 200);
+
+  if(lastBlasted.X != 8 || lastBlasted.Y != 2)
+  {
+    throw new System.Exception(lastBlasted.X + ":" + lastBlasted.Y + " - " + lastBlasted.AngleFromPoint + " should be 8:2");
+  }
+  else
+  {
+    Console.WriteLine("Day ten part two test two passed");
+  }  
+
+  lastBlasted = map.BlastXAsteroids(11, 13, 201);
+
+  if(lastBlasted.X != 10 || lastBlasted.Y != 9)
+  {
+    throw new System.Exception(lastBlasted.X + ":" + lastBlasted.Y + " - " + lastBlasted.AngleFromPoint + " should be 8:2");
+  }
+  else
+  {
+    Console.WriteLine("Day ten part two test three passed");
   }
 }
 

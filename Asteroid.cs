@@ -36,22 +36,53 @@ class Asteroid : IMapPoint
 
   public IMapPoint AddAngleAndDistance(IMapPoint target)
   {
-    var xDistance = X - target.X;
-    var yDistance = Y - target.Y;
+    var xDistance = Math.Abs(X - target.X);
+    var yDistance = Math.Abs(Y - target.Y);
     target.DistanceFromPoint = Math.Sqrt(Math.Pow(xDistance, 2) + Math.Pow(yDistance, 2));
-    target.AngleFromPoint = Math.Atan2(yDistance, xDistance);
+    var rawAngle = (180 / Math.PI) * Math.Atan2(yDistance, xDistance);
+    
+    if (xDistance == 0)
+    {
+      if ( target.Y < Y )
+        rawAngle = 0;
+      if ( target.Y > Y )
+        rawAngle = 180;
+    }
+    else if (yDistance == 0)
+    {
+      if ( target.X > X )
+        rawAngle = 90;
+      if ( target.X < X )
+        rawAngle = 270;      
+    }
+    else if ( target.X > X )
+    {
+      if ( target.Y < Y )
+        rawAngle = 90 - rawAngle;      
+      if ( target.Y > Y )
+        rawAngle = rawAngle = (90 - rawAngle) + 90;
+    }
+    else
+    {
+      if ( target.Y < Y )
+        rawAngle = (rawAngle) + 270;
+      if ( target.Y > Y )
+        rawAngle = (90 - rawAngle) + 180;
+    }
+
+    target.AngleFromPoint = rawAngle;
 
     return target;
   } 
 
   public void GenerateVectorsToAllOtherPoints(List<IMapPoint> points)
   {
-    Points = points;
-    for(var i = 0; i < Points.Count; i++)
+    Points = new List<IMapPoint>();
+    for(var i = 0; i < points.Count; i++)
     {
-      if (Points[i].X == X && Points[i].Y == Y)
+      if (points[i].X == X && points[i].Y == Y)
         continue;
-      Points[i] = AddAngleAndDistance(Points[i]);     
+      Points.Add(AddAngleAndDistance(points[i]));     
     }
   }
 
@@ -59,31 +90,38 @@ class Asteroid : IMapPoint
   {
     var blastedCount = 0;
 
+    var count = 0;
+
     // Sort List of asteroids
-    var points = Points.OrderBy(p=>p.DistanceFromPoint);
+    var points = Points.OrderBy(p => p.AngleFromPoint).ThenBy(p=>p.DistanceFromPoint);
+
+    foreach(var p in points)
+    {
+      count++;
+      Console.WriteLine(count + " .. " + p.X + ":" + p.Y + " - " + p.AngleFromPoint + " - " + p.DistanceFromPoint);
+    }
 
     var remainingPoints = new List<IMapPoint>();
 
     do{
       Angles.Clear();
-
+      remainingPoints.Clear();
+      Console.WriteLine(blastedCount);
       // Loop until limit is reached
       foreach(var p in points)
       {
-        try
-        {
-          Angles.Add(p.AngleFromPoint);
-        } catch(Exception ex)
+        if( !Angles.Add(p.AngleFromPoint) )
         {
           remainingPoints.Add(p);
           continue;
         }
         blastedCount ++;
+        Console.WriteLine("Blasted asteroid no " + blastedCount + ": " + p.X + ":" + p.Y + " - " + p.AngleFromPoint + " / " + p.DistanceFromPoint);
         if(blastedCount == blastLimit)
           return p;
       }
 
-      points = remainingPoints.OrderBy(p=>p.DistanceFromPoint);
+      points = remainingPoints.OrderBy(p => p.AngleFromPoint).ThenBy(p=>p.DistanceFromPoint);
 
     } while(blastedCount < Points.Count);
     return null;

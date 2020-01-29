@@ -20,6 +20,19 @@ namespace aoc_2019
         Console.WriteLine(ex.Message);
       }
 
+      try{
+        var dayTen = new DayTen();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Console.WriteLine(dayTen.RunTestsAndGetResultPartTwo());
+        watch.Stop();
+        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
+      }
+      catch(Exception ex){
+        Console.WriteLine(ex.Message);
+      }      
+
+      
+
     }
   }
 }

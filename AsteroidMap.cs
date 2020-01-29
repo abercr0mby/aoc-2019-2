@@ -27,15 +27,17 @@ class AsteroidMap
     GenerateLosVectors();
   }
 
+  public IMapPoint BlastXAsteroids(int x, int y, int blastLimit)
+  {
+    var laserStation = (Asteroid) Asteroids.FirstOrDefault(a => a.X == x && a.Y == y);
+    laserStation.GenerateVectorsToAllOtherPoints(Asteroids);
+    return laserStation.BlastXAsteroids(blastLimit);
+  }
+
   public int GetMaxDetectable()
   {
     return Asteroids.Max(a => a.Angles.Count);
   }
-
-public void GenerateVectorsToALlOtherAsteroidsFrom(IMapPoint asteroid)
-{
-  asteroid.GenerateVectorsToAllOtherPoints(Asteroids);
-}
 
   public void GenerateLosVectors()
   {
