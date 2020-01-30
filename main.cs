@@ -10,27 +10,15 @@ namespace aoc_2019
       previousDays.Run();
 
       try{
-        var dayTen = new DayTen();
+        var dayEleven = new DayEleven();
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayTen.RunTestsAndGetResultPartOne());
+        Console.WriteLine(dayEleven.RunTestsAndGetResultPartOne());
         watch.Stop();
         Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
       }
       catch(Exception ex){
         Console.WriteLine(ex.Message);
-      }
-
-      try{
-        var dayTen = new DayTen();
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayTen.RunTestsAndGetResultPartTwo());
-        watch.Stop();
-        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
-      }
-      catch(Exception ex){
-        Console.WriteLine(ex.Message);
-      }      
-
+      }   
     }
   }
 }

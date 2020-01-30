@@ -6,7 +6,7 @@ class DayTwo {
 
   public long RunTestsAndGetResultPartOne () {
     RunTestsPartOne();
-    var computer = new IntCodeComputer((long[]) mainInput.Clone(), null, false, true);
+    var computer = new IntCodeComputer((long[]) mainInput.Clone(), null, false);
     computer.Compute();
     return computer.Program[0];
   }
@@ -28,7 +28,7 @@ class DayTwo {
   }
 
   public void RunTestsPartOne () {
-    var computer = new IntCodeComputer(new long[] {1,9,10,3,2,3,11,0,99,30,40,50}, null, false, true);
+    var computer = new IntCodeComputer(new long[] {1,9,10,3,2,3,11,0,99,30,40,50}, null, false);
     computer.Compute();
     if(computer.Program[0] != 3500) {
       throw new System.Exception(computer.Program[0] + " should be: 3500");
@@ -38,7 +38,7 @@ class DayTwo {
       Console.WriteLine("Day Two Test One Passed");
     }    
 
-    computer = new IntCodeComputer(new long[] {1,0,0,0,99}, null, false, true);
+    computer = new IntCodeComputer(new long[] {1,0,0,0,99}, null, false);
     computer.Compute();
     if(computer.Program[0] != 2) {
       Console.WriteLine(computer.Program[0]);
@@ -49,7 +49,7 @@ class DayTwo {
       Console.WriteLine("Day Two Test Two Passed");
     }    
 
-    computer = new IntCodeComputer(new long[] {2,3,0,3,99}, null, false, true);
+    computer = new IntCodeComputer(new long[] {2,3,0,3,99}, null, false);
     computer.Compute();
     if(computer.Program[3] != 6) {
       Console.WriteLine(computer.Program[3]);
@@ -60,7 +60,7 @@ class DayTwo {
       Console.WriteLine("Day Two Test Three Passed");
     }
 
-    computer = new IntCodeComputer(new long[] {2,4,4,5,99,0}, null, false, true);
+    computer = new IntCodeComputer(new long[] {2,4,4,5,99,0}, null, false);
     computer.Compute();
     if(computer.Program[5] != 9801) {
       Console.WriteLine(computer.Program[5]);
@@ -71,7 +71,7 @@ class DayTwo {
       Console.WriteLine("Day Two Test Four Passed");
     }    
 
-    computer = new IntCodeComputer( new long[] {1,1,1,4,99,5,6,0,99},null, false, true);
+    computer = new IntCodeComputer( new long[] {1,1,1,4,99,5,6,0,99},null, false);
     computer.Compute();
     if(computer.Program[0] != 30 && computer.Program[4] != 2) {
       Console.WriteLine(computer.Program[0]);
