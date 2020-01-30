@@ -31,8 +31,6 @@ namespace aoc_2019
         Console.WriteLine(ex.Message);
       }      
 
-      
-
     }
   }
 }

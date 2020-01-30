@@ -6,25 +6,26 @@ class IntCodeComputer
   public long[] Program;
   private long CurrentPosition { get; set; }
   private long RelativeBase { get; set; }
-  private string NextOpCode { get; set; } 
+  private string NextOpCode { get; set; }
   public bool Halted { get; set; }
 
   public long[] Inputs { get; set; }
   private int CurrentInput { get; set; }
   public List<long> Output { get; set; } = new List<long>();
-  private bool Debug { get; set; }
   private bool PauseAfterOutput { get; set; }
 
-  public IntCodeComputer(long[] program, long[] inputs, bool pauseAfterOutput = true, bool debug = false)
+  public IntCodeComputer(
+    long[] program, 
+    long[] inputs, 
+    bool pauseAfterOutput = true )
   {
     CurrentPosition = 0;    
-    this.Program = (long[]) program.Clone();
-
-    this.Inputs = inputs;
     CurrentInput = 0;
-    RelativeBase = 0;
+    RelativeBase = 0;    
     Halted = false;
-    Debug = debug;
+
+    this.Program = (long[]) program.Clone();
+    this.Inputs = inputs;
     PauseAfterOutput = pauseAfterOutput;
   }
 
@@ -217,21 +218,13 @@ class IntCodeComputer
     ChangeCurrentPosition(CurrentPosition += 2);
   }
 
-  public void Compute() 
+  public void Compute()
   {
     while(NextOpCode != "99")
     {
       var opCodeValue = Program[CurrentPosition].ToString();          
       SetNextOpCode();
       char[] parameterTypes = GetParameterTypesFromOpCodeValue(opCodeValue, NextOpCode);      
-
-      if(Debug)
-      {
-        //Console.WriteLine("next: " + NextOpCode + " curr: " + CurrentPosition + " - " + "op " + opCodeValue + " rb: " + RelativeBase);      
-        //foreach(var p in Program)
-        //  Console.Write(p + " - ");
-        //Console.WriteLine("");
-      }
       switch (NextOpCode)
       {
         case "01":
