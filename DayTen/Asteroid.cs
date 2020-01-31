@@ -31,7 +31,7 @@ class Asteroid : IMapPoint
     point = AddAngleAndDistance(point);
     try{
       Angles.Add(point.AngleFromPoint);
-    }catch(Exception ex){}
+    }catch(Exception){}
   }
 
   public IMapPoint AddAngleAndDistance(IMapPoint target)
@@ -60,7 +60,7 @@ class Asteroid : IMapPoint
       if ( target.Y < Y )
         rawAngle = 90 - rawAngle;      
       if ( target.Y > Y )
-        rawAngle = rawAngle = (90 - rawAngle) + 90;
+        rawAngle = (90 - rawAngle) + 90;
     }
     else
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 class DayEleven
 {
@@ -10,13 +11,14 @@ class DayEleven
 
   public void RunTestsPartOne()
   {
-    if(false)
-    {
-      throw new System.Exception("Should be 8:2");
-    }
-    else
-    {
-      Console.WriteLine("Day ten part two test one passed");
-    }    
+    var surface = new Surface(10, 10);
+    surface.AddRobot();
+    surface.MakeRobotPaint();
+    var paintedCount = surface.GetPaintedCount();
+    surface.RenderHull();
+
+    Console.WriteLine("Damn, surface had " + surface.Panels.Count() + " panels");
+    Console.WriteLine("Day eleven, dat robot painted " + paintedCount + " panels");
+
   }
 }
