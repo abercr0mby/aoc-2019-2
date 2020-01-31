@@ -9,17 +9,17 @@ namespace aoc_2019
       var previousDays = new PreviousDays();
       previousDays.Run();
 
-/*      try{
-        var dayEleven = new DayEleven();
+      try{
+        var dayTwelve = new DayTwelve();
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayEleven.RunTestsAndGetResultPartOne());
+        Console.WriteLine(dayTwelve.RunTestsAndGetResultPartOne());
         watch.Stop();
         Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
       }
       catch(Exception ex){
         Console.WriteLine(ex.Message);
       }   
-    }*/
+    }
   }
 }
 
