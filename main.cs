@@ -9,7 +9,7 @@ namespace aoc_2019
       var previousDays = new PreviousDays();
       previousDays.Run();
 
-      try{
+/*      try{
         var dayEleven = new DayEleven();
         var watch = System.Diagnostics.Stopwatch.StartNew();
         Console.WriteLine(dayEleven.RunTestsAndGetResultPartOne());
@@ -19,7 +19,7 @@ namespace aoc_2019
       catch(Exception ex){
         Console.WriteLine(ex.Message);
       }   
-    }
+    }*/
   }
 }
 
