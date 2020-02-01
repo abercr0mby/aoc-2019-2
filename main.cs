@@ -12,7 +12,7 @@ namespace aoc_2019
       try{
         var dayTwelve = new DayTwelve();
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayTwelve.RunTestsAndGetResultPartOne());
+        Console.WriteLine(dayTwelve.PartTwo());
         watch.Stop();
         Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
       }

@@ -3,6 +3,24 @@ using System.Linq;
 
 class DayTwelve
 {
+
+  public int PartTwo()
+  {
+    var systemData = @"<x=-1, y=0, z=2>
+<x=2, y=-10, z=-7>
+<x=4, y=-8, z=8>
+<x=3, y=5, z=-1>";
+
+  var partTwo = new DayTwelvePartTwo(systemData);
+
+//for(var i = 0; i< 100; i++)
+  partTwo.PerformSteps(4686774900);
+
+  Console.WriteLine("steps doned!");
+
+    return 0;
+  }
+
   public int RunTestsAndGetResultPartOne() 
   {
     RunTestsPartOne(); 
@@ -12,7 +30,7 @@ class DayTwelve
 <x=-13, y=18, z=-2>
 <x=6, y=0, z=-1>";
     var centre = new OrbitCentre(systemData);
-    centre.SetTheWorldInMotion(4686774924);
+    centre.SetTheWorldInMotion(1000);
     return 0;
     //return centre.CalculateTotalEnergy();    
   }
