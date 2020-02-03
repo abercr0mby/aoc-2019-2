@@ -207,5 +207,18 @@ class PreviousDays
         Console.WriteLine(ex.Message);
       }
       */
+
+      /*
+      try{
+        var dayTwelve = new DayTwelve();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Console.WriteLine(dayTwelve.PartTwo());
+        watch.Stop();
+        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
+      }
+      catch(Exception ex){
+        Console.WriteLine(ex.Message);
+      } 
+      */
   }
 }

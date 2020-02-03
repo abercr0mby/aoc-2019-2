@@ -25,57 +25,57 @@ class DayTwelvePartTwo
 
   public DayTwelvePartTwo(string systemData)
   {
-      OrbitalBodies = new List<OrbitalBody>();
-      Pairings = new List<int[]>();
+    OrbitalBodies = new List<OrbitalBody>();
+    Pairings = new List<int[]>();
 
-      CreateBodiesFromData(systemData);
+    CreateBodiesFromData(systemData);
 
-      XLog = new Dictionary<string, long>();
-      YLog = new Dictionary<string, long>();
-      ZLog = new Dictionary<string, long>();
+    XLog = new Dictionary<string, long>();
+    YLog = new Dictionary<string, long>();
+    ZLog = new Dictionary<string, long>();
 
-      var xKey = "";
-      var yKey = "";
-      var zKey = "";
+    var xKey = "";
+    var yKey = "";
+    var zKey = "";
 
-      for(var i = 0; i < OrbitalBodies.Count; i++)
-      {
-        xKey = xKey + OrbitalBodies[i].XPosition.ToString() + ":" + OrbitalBodies[i].XVelocity.ToString() + ":";
-        yKey = yKey + OrbitalBodies[i].YPosition.ToString() + ":" + OrbitalBodies[i].YVelocity.ToString() + ":";
-        zKey = zKey + OrbitalBodies[i].ZPosition.ToString() + ":" + OrbitalBodies[i].ZVelocity.ToString() + ":";
-      }
+    for(var i = 0; i < OrbitalBodies.Count; i++)
+    {
+      xKey = xKey + OrbitalBodies[i].XPosition.ToString() + ":" + OrbitalBodies[i].XVelocity.ToString() + ":";
+      yKey = yKey + OrbitalBodies[i].YPosition.ToString() + ":" + OrbitalBodies[i].YVelocity.ToString() + ":";
+      zKey = zKey + OrbitalBodies[i].ZPosition.ToString() + ":" + OrbitalBodies[i].ZVelocity.ToString() + ":";
+    }
 
-      XLog.Add(xKey, 0);
-      YLog.Add(yKey, 0);
-      ZLog.Add(zKey, 0);              
+    XLog.Add(xKey, 0);
+    YLog.Add(yKey, 0);
+    ZLog.Add(zKey, 0);              
 
-      XPositions = new int[OrbitalBodies.Count];
-      YPositions = new int[OrbitalBodies.Count];
-      ZPositions = new int[OrbitalBodies.Count];
-      XVelocities = new int[OrbitalBodies.Count];
-      YVelocities = new int[OrbitalBodies.Count];
-      ZVelocities = new int[OrbitalBodies.Count];
+    XPositions = new int[OrbitalBodies.Count];
+    YPositions = new int[OrbitalBodies.Count];
+    ZPositions = new int[OrbitalBodies.Count];
+    XVelocities = new int[OrbitalBodies.Count];
+    YVelocities = new int[OrbitalBodies.Count];
+    ZVelocities = new int[OrbitalBodies.Count];
 
-      for(var i = 0; i < XPositions.Length; i++)
-      {
-          for(var j = i+1; j < XPositions.Length; j++)
-          {
-              Pairings.Add(new int[] {i, j});
-          }
-      }
+    for(var i = 0; i < XPositions.Length; i++)
+    {
+        for(var j = i+1; j < XPositions.Length; j++)
+        {
+            Pairings.Add(new int[] {i, j});
+        }
+    }
 
-      for(var i = 0; i < OrbitalBodies.Count; i++)
-      {
-        XPositions[i] = OrbitalBodies[i].XPosition;
-        YPositions[i] = OrbitalBodies[i].YPosition;
-        ZPositions[i] = OrbitalBodies[i].ZPosition;
-      }
+    for(var i = 0; i < OrbitalBodies.Count; i++)
+    {
+      XPositions[i] = OrbitalBodies[i].XPosition;
+      YPositions[i] = OrbitalBodies[i].YPosition;
+      ZPositions[i] = OrbitalBodies[i].ZPosition;
+    }
 
-      Console.WriteLine(Pairings.Count);
-      foreach(var p in Pairings)
-      {
-        Console.WriteLine(p[0] + " : " + p[1]);
-      }
+    Console.WriteLine(Pairings.Count);
+    foreach(var p in Pairings)
+    {
+      Console.WriteLine(p[0] + " : " + p[1]);
+    }
   }
 
   public long FindRepeat()
