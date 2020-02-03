@@ -22,28 +22,11 @@ class ArcadeCabinet
   public void SetUpBoard()
   {
     Processor.Compute();
+  }
 
-    foreach(var o in Processor.Output)
-    {
-      Console.WriteLine(o);
-    }
-
-    foreach(var o in Processor.Output.Where((x, i) => (i % 3 == 0) && x == 0))
-    {
-      Console.WriteLine(o);
-    }
-    Console.WriteLine(Processor.Output.Count());
-    Console.WriteLine(Processor.Output.Where((x, i) => i % 3 == 0).Count());
-
-    var results = Processor.Output.Where((x, i) => (i % 3 == 0)).GroupBy(
-    o => o, 
-    (key, x) => new { Key = key, Count = x.Count() });
-
-    foreach(var x in results)
-    {
-      Console.WriteLine(x.Key + " : " + x.Count);
-    }
-
+  public int CountType(int type)
+  {
+    return Processor.Output.Where((x, i) => (i + 1) % 3 == 0).Count(x => x == type);
   }
 
 }
