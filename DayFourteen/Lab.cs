@@ -5,6 +5,8 @@ class Lab
 {
   public static Dictionary<string, Reaction> LabBook { get; set; }
 
+  public static Dictionary<string, int> Stock { get; set; }
+
   public const string ORE = "ORE";
   private const string FUEL = "FUEL";
 
@@ -13,6 +15,13 @@ class Lab
   static Lab()
   {
     LabBook = new Dictionary<string, Reaction>();
+    Stock = new Dictionary<string, int>();
+  }
+
+  public static void Reset()
+  {
+    LabBook.Clear();
+    Stock.Clear();
   }
 
   public static void RecordReactionsInLabBook(string observations)
@@ -35,6 +44,37 @@ class Lab
         reaction.Inputs.Add(inputs[1], inputQuantity);
       }
       LabBook.Add(outputData[1], reaction);
+    }
+  }
+
+  public static int GetStock(string checmicalName, int required)
+  {
+    var stock = 0;
+    if(Stock.TryGetValue(checmicalName, out stock))
+    {
+      if(stock <= required)
+      {
+        Stock[checmicalName] = 0;
+      }
+      else
+      {
+        Stock[checmicalName] = stock - required;
+      }
+
+    }
+    return stock;
+  }
+
+  public static void PlaceInStock(string checmicalName, int spare)
+  {
+    var stock = 0;
+    if(Stock.TryGetValue(checmicalName, out stock))
+    {
+      Stock[checmicalName] = stock + spare;
+    }
+    else
+    {
+      Stock.Add(checmicalName, spare);
     }
   }
 

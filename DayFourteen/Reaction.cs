@@ -19,7 +19,13 @@ class Reaction
   public int React(int quantityRequired)
   {
     var ore = 0;
+
+    var stock = Lab.GetStock(OutputChemical, quantityRequired);
+    quantityRequired = quantityRequired - stock;
+
     var noOfReactions = (int) Math.Ceiling((double) quantityRequired / (double) OutputQuantity);
+
+    Lab.PlaceInStock(OutputChemical, (noOfReactions * OutputQuantity) - quantityRequired);
 
     foreach(var i in Inputs)
     {
