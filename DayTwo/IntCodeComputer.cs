@@ -14,19 +14,24 @@ class IntCodeComputer
   public List<long> Output { get; set; } = new List<long>();
   private bool PauseAfterOutput { get; set; }
 
+  private bool PauseBeforeInputToggle { get; set; }  
+  private bool PauseBeforeInput { get; set; }  
+
   public IntCodeComputer(
     long[] program, 
     long[] inputs, 
-    bool pauseAfterOutput = true )
+    bool pauseAfterOutput = true,
+    bool pauseBeforeInput = true )
   {
     CurrentPosition = 0;    
     CurrentInput = 0;
-    RelativeBase = 0;    
+    RelativeBase = 0;
     Halted = false;
 
     this.Program = (long[]) program.Clone();
     this.Inputs = inputs;
     PauseAfterOutput = pauseAfterOutput;
+    PauseBeforeInputToggle = pauseBeforeInput;
   }
 
   public void SetInputSignal(long inputSignal)
@@ -145,6 +150,7 @@ class IntCodeComputer
       }
 
       ChangeCurrentPosition(CurrentPosition += 2);
+      PauseBeforeInput = PauseBeforeInputToggle;
       return;
     }
   }  
@@ -224,6 +230,13 @@ class IntCodeComputer
     {
       var opCodeValue = Program[CurrentPosition].ToString();          
       SetNextOpCode();
+
+      if(NextOpCode == "03" && PauseBeforeInput)
+      { 
+        PauseBeforeInput = false; 
+        break;
+      }
+
       char[] parameterTypes = GetParameterTypesFromOpCodeValue(opCodeValue, NextOpCode);      
       switch (NextOpCode)
       {
