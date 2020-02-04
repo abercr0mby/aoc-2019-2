@@ -220,5 +220,20 @@ class PreviousDays
         Console.WriteLine(ex.Message);
       } 
       */
+
+      /*
+      var previousDays = new PreviousDays();
+      previousDays.Run();
+      try{
+        var dayThirteen = new DayThirteen();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Console.WriteLine(dayThirteen.PartOne());
+        watch.Stop();
+        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
+      }
+      catch(Exception ex){
+        Console.WriteLine(ex.Message);
+      } */
+
   }
 }

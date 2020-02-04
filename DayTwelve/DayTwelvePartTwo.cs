@@ -116,11 +116,7 @@ class DayTwelvePartTwo
   }
 
   public void MoveCheckAndLog(long step)
-  {
-    var xRepeat = true;
-    var yRepeat = true;
-    var zRepeat = true;
-
+  { 
     var xKey = "";
     var yKey = "";
     var zKey = "";
