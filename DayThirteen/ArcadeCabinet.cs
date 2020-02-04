@@ -43,8 +43,7 @@ class ArcadeCabinet
     {
       BuildGrid();
       if(BallY > BatY || BlockCount < 1)
-        gameOver = true;
-      RenderGrid();
+        gameOver = true;      
       if(useAi)
       {
         if(BatX < BallX)
@@ -56,6 +55,7 @@ class ArcadeCabinet
       }
       else
       {
+        RenderGrid();
         var joystickInput = WaitForJoystickInput();
         Processor.SetInputSignal(joystickInput);        
       }
