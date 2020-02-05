@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class Lab
 {
@@ -41,40 +42,50 @@ class Lab
         var inputs = i.Trim().Split(' ');
         var inputQuantity = 0;
         Int32.TryParse(inputs[0], out inputQuantity);
-        reaction.Inputs.Add(inputs[1], inputQuantity);
+        reaction.Inputs.Add(inputs[1], Tuple.Create<int, Reaction>(inputQuantity, null));
       }
       LabBook.Add(outputData[1], reaction);
     }
+
+    foreach(var l in LabBook)
+    {
+      var stagedInputs = new Dictionary<string, Tuple<int, Reaction>>();
+      foreach(var i in l.Value.Inputs)
+      {
+        stagedInputs.Add(i.Key, Tuple.Create<int, Reaction>(i.Value.Item1, GetReaction(i.Key)));
+      }
+      l.Value.Inputs = stagedInputs;
+    }
   }
 
-  public static int GetStock(string checmicalName, int required)
+  public static int GetStock(string chemicalName, int required)
   {
     var stock = 0;
-    if(Stock.TryGetValue(checmicalName, out stock))
+    if(Stock.TryGetValue(chemicalName, out stock))
     {
       if(stock <= required)
       {
-        Stock[checmicalName] = 0;
+        Stock[chemicalName] = 0;
       }
       else
       {
-        Stock[checmicalName] = stock - required;
+        Stock[chemicalName] = stock - required;
       }
 
     }
     return stock;
   }
 
-  public static void PlaceInStock(string checmicalName, int spare)
+  public static void PlaceInStock(string chemicalName, int spare)
   {
     var stock = 0;
-    if(Stock.TryGetValue(checmicalName, out stock))
+    if(Stock.TryGetValue(chemicalName, out stock))
     {
-      Stock[checmicalName] = stock + spare;
+      Stock[chemicalName] = stock + spare;
     }
     else
     {
-      Stock.Add(checmicalName, spare);
+      Stock.Add(chemicalName, spare);
     }
   }
 
@@ -94,6 +105,16 @@ class Lab
     }
 
     var chemicalReaction = GetReaction(FUEL);
-    return chemicalReaction.React(quantityRequired);
+    var totalOre = chemicalReaction.React(quantityRequired);
+
+    if(Stock.Values.Count(s => s > 0) == 0)
+      throw new Exception("Holy SHIT!!!!!");
+
+    foreach(var s in Stock)
+    {
+      Console.WriteLine(s.Key + " : " + s.Value);
+    }
+
+    return totalOre;
   }
 }

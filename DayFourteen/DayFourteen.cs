@@ -4,7 +4,7 @@ class DayFourteen
 {
   public int PartOne()
   {
-    RunTestsPartOne();
+    //RunTestsPartOne();
     var observations = @"7 FQPX => 7 GTJFL
 4 PZFS, 1 PRZTG => 5 RZSK
 2 DMBCB => 7 PMBWS
@@ -63,7 +63,14 @@ class DayFourteen
 194 ORE => 9 RCKBT";
   Lab.Reset();
   Lab.RecordReactionsInLabBook(observations);
-  return Lab.MakeChemical("FUEL", 1);
+  for(var i = 0; i < 1000; i++)
+  {
+    Lab.MakeChemical("FUEL", 1);     
+    Console.WriteLine();
+    Console.WriteLine();
+  }
+
+  return 0;
 }
 
   public void RunTestsPartOne()

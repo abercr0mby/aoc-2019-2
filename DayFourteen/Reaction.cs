@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 class Reaction
 {
-  public Dictionary<string, int> Inputs { get; set; }
+  public Dictionary<string, Tuple<int, Reaction>> Inputs { get; set; }
 
   public string OutputChemical { get; set; }
 
   public int OutputQuantity { get; set; }
 
+  public int Stock { get; set; }
+
   public Reaction(string output, int outputQuantity)
   {
-    Inputs = new Dictionary<string, int>();
+    Inputs = new Dictionary<string, Tuple<int, Reaction>>();
     OutputChemical = output;
     OutputQuantity = outputQuantity;
   }
@@ -33,12 +35,11 @@ class Reaction
     {
       if(i.Key.Equals(Lab.ORE))
       {
-        ore += i.Value * noOfReactions;
+        ore += i.Value.Item1 * noOfReactions;
       }
       else
       {
-        var makeWith = Lab.GetReaction(i.Key);
-        ore += makeWith.React(i.Value * noOfReactions);
+        ore += i.Value.Item2.React(i.Value.Item1 * noOfReactions);
       }    
     }
     return ore;
