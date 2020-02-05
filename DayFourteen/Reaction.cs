@@ -22,6 +22,8 @@ class Reaction
 
     var stock = Lab.GetStock(OutputChemical, quantityRequired);
     quantityRequired = quantityRequired - stock;
+    if( quantityRequired < 1 )
+      return 0;
 
     var noOfReactions = (int) Math.Ceiling((double) quantityRequired / (double) OutputQuantity);
 
