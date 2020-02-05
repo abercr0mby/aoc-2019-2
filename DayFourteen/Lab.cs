@@ -27,15 +27,18 @@ class Lab
 
   public static long MakeMostFuelWith(long availableOre)
   {
-    long batchSize = 100000000000;
-    do
-    {
+    long batchSize = 5000000;
+    return MakeChemical(FUEL, batchSize);
+/*     do{
       batchSize ++;
+      Stock.Clear();
       long oreUsed = MakeChemical(FUEL, batchSize);
-      Console.WriteLine(batchSize + " : " + oreUsed);
-      if(oreUsed > availableOre)
+      if ( oreUsed > availableOre )
+      {
         return batchSize - 1;
-    }while (true);
+      }
+    }
+    while(true); */
   }
 
   public static void RecordReactionsInLabBook(string observations)
@@ -45,27 +48,27 @@ class Lab
     {
       var components = r.Split("=>");
       var outputData = components[1].Trim().Split(' ');
-      var outputQuantity = 0;
-      Int32.TryParse(outputData[0], out outputQuantity);
+      long outputQuantity = 0;
+      long.TryParse(outputData[0], out outputQuantity);
       var reaction = new Reaction(outputData[1], outputQuantity);
 
       var inputDatas = components[0].Split(',');
       foreach(var i in inputDatas)
       {
         var inputs = i.Trim().Split(' ');
-        var inputQuantity = 0;
-        Int32.TryParse(inputs[0], out inputQuantity);
-        reaction.Inputs.Add(inputs[1], Tuple.Create<int, Reaction>(inputQuantity, null));
+        long inputQuantity = 0;
+        long.TryParse(inputs[0], out inputQuantity);
+        reaction.Inputs.Add(inputs[1], Tuple.Create<long, Reaction>(inputQuantity, null));
       }
       LabBook.Add(outputData[1], reaction);
     }
 
     foreach(var l in LabBook)
     {
-      var stagedInputs = new Dictionary<string, Tuple<int, Reaction>>();
+      var stagedInputs = new Dictionary<string, Tuple<long, Reaction>>();
       foreach(var i in l.Value.Inputs)
       {
-        stagedInputs.Add(i.Key, Tuple.Create<int, Reaction>(i.Value.Item1, GetReaction(i.Key)));
+        stagedInputs.Add(i.Key, Tuple.Create<long, Reaction>(i.Value.Item1, GetReaction(i.Key)));
       }
       l.Value.Inputs = stagedInputs;
     }

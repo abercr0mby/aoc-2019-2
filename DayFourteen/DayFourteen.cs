@@ -64,7 +64,9 @@ class DayFourteen
 194 ORE => 9 RCKBT";
   Lab.Reset();
   Lab.RecordReactionsInLabBook(observations);
+  //return Lab.MakeChemical("FUEL", 1000000000);
   return Lab.MakeMostFuelWith(1000000000000);
+
 }
 
   public void RunTestsPartOne()

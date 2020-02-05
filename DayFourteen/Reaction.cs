@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 class Reaction
 {
-  public Dictionary<string, Tuple<int, Reaction>> Inputs { get; set; }
+  public Dictionary<string, Tuple<long, Reaction>> Inputs { get; set; }
 
   public string OutputChemical { get; set; }
 
@@ -11,9 +11,9 @@ class Reaction
 
   public long Stock { get; set; }
 
-  public Reaction(string output, int outputQuantity)
+  public Reaction(string output, long outputQuantity)
   {
-    Inputs = new Dictionary<string, Tuple<int, Reaction>>();
+    Inputs = new Dictionary<string, Tuple<long, Reaction>>();
     OutputChemical = output;
     OutputQuantity = outputQuantity;
   }
