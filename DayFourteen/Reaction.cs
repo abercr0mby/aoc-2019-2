@@ -7,9 +7,9 @@ class Reaction
 
   public string OutputChemical { get; set; }
 
-  public int OutputQuantity { get; set; }
+  public long OutputQuantity { get; set; }
 
-  public int Stock { get; set; }
+  public long Stock { get; set; }
 
   public Reaction(string output, int outputQuantity)
   {
@@ -18,19 +18,21 @@ class Reaction
     OutputQuantity = outputQuantity;
   }
 
-  public int React(int quantityRequired)
+  public long React(long quantityRequired)
   {
-    var ore = 0;
+    long ore = 0;
 
-    var stock = Lab.GetStock(OutputChemical, quantityRequired);
-    quantityRequired = quantityRequired - stock;
-    if( quantityRequired < 1 )
-      return 0;
+    if(OutputChemical != Lab.FUEL)
+    {
+      var stock = Lab.GetStock(OutputChemical, quantityRequired);
+      quantityRequired = quantityRequired - stock;
+      if( quantityRequired < 1 )
+        return 0;
+    }
 
     var noOfReactions = (int) Math.Ceiling((double) quantityRequired / (double) OutputQuantity);
-
     Lab.PlaceInStock(OutputChemical, (noOfReactions * OutputQuantity) - quantityRequired);
-
+    
     foreach(var i in Inputs)
     {
       if(i.Key.Equals(Lab.ORE))

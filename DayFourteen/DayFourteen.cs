@@ -1,8 +1,9 @@
 using System;
+using System.Linq;
 
 class DayFourteen
 {
-  public int PartOne()
+  public long PartOne()
   {
     //RunTestsPartOne();
     var observations = @"7 FQPX => 7 GTJFL
@@ -63,14 +64,7 @@ class DayFourteen
 194 ORE => 9 RCKBT";
   Lab.Reset();
   Lab.RecordReactionsInLabBook(observations);
-  for(var i = 0; i < 1000; i++)
-  {
-    Lab.MakeChemical("FUEL", 1);     
-    Console.WriteLine();
-    Console.WriteLine();
-  }
-
-  return 0;
+  return Lab.MakeMostFuelWith(1000000000000);
 }
 
   public void RunTestsPartOne()

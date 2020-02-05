@@ -6,23 +6,36 @@ class Lab
 {
   public static Dictionary<string, Reaction> LabBook { get; set; }
 
-  public static Dictionary<string, int> Stock { get; set; }
+  public static Dictionary<string, long> Stock { get; set; }
 
   public const string ORE = "ORE";
-  private const string FUEL = "FUEL";
+  public const string FUEL = "FUEL";
 
-  public static int OreQuantity = 0;
+  public static long OreQuantity = 0;
 
   static Lab()
   {
     LabBook = new Dictionary<string, Reaction>();
-    Stock = new Dictionary<string, int>();
+    Stock = new Dictionary<string, long>();
   }
 
   public static void Reset()
   {
     LabBook.Clear();
     Stock.Clear();
+  }
+
+  public static long MakeMostFuelWith(long availableOre)
+  {
+    long batchSize = 100000000000;
+    do
+    {
+      batchSize ++;
+      long oreUsed = MakeChemical(FUEL, batchSize);
+      Console.WriteLine(batchSize + " : " + oreUsed);
+      if(oreUsed > availableOre)
+        return batchSize - 1;
+    }while (true);
   }
 
   public static void RecordReactionsInLabBook(string observations)
@@ -58,9 +71,9 @@ class Lab
     }
   }
 
-  public static int GetStock(string chemicalName, int required)
+  public static long GetStock(string chemicalName, long required)
   {
-    var stock = 0;
+    long stock = 0;
     if(Stock.TryGetValue(chemicalName, out stock))
     {
       if(stock <= required)
@@ -76,9 +89,9 @@ class Lab
     return stock;
   }
 
-  public static void PlaceInStock(string chemicalName, int spare)
+  public static void PlaceInStock(string chemicalName, long spare)
   {
-    var stock = 0;
+    long stock = 0;
     if(Stock.TryGetValue(chemicalName, out stock))
     {
       Stock[chemicalName] = stock + spare;
@@ -97,23 +110,10 @@ class Lab
     return chemicalReaction;
   }
 
-  public static int MakeChemical(string chemical, int quantityRequired)
+  public static long MakeChemical(string chemical, long quantityRequired)
   {
-    if ( chemical.Equals(ORE) )
-    {
-      OreQuantity += quantityRequired;
-    }
-
-    var chemicalReaction = GetReaction(FUEL);
+    var chemicalReaction = GetReaction(chemical);
     var totalOre = chemicalReaction.React(quantityRequired);
-
-    if(Stock.Values.Count(s => s > 0) == 0)
-      throw new Exception("Holy SHIT!!!!!");
-
-    foreach(var s in Stock)
-    {
-      Console.WriteLine(s.Key + " : " + s.Value);
-    }
 
     return totalOre;
   }
