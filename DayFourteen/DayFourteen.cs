@@ -3,11 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 
 class DayFourteen
-{
-  public long PartOne()
-  {
-   // RunTestsPartTwo();
-    var observations = @"7 FQPX => 7 GTJFL
+{ 
+  public string Observations = @"7 FQPX => 7 GTJFL
 4 PZFS, 1 PRZTG => 5 RZSK
 2 DMBCB => 7 PMBWS
 1 VLPSJ, 3 KVCJV, 5 FLKD => 8 RWJC
@@ -64,98 +61,48 @@ class DayFourteen
 12 KMJG, 3 XLKT => 8 GDSXB
 194 ORE => 9 RCKBT";
 
-Dictionary<int, long> results = new Dictionary<int, long>(); 
-
-for(var i = 1; i < 1000; i++)
-{
-  Lab.Reset();
-  Lab.RecordReactionsInLabBook(observations);
-  var oreMade = Lab.MakeChemical("FUEL", i);
-
-  results.Add(i, oreMade / i);
-  //Console.WriteLine(oreUsed);
-  /*foreach(var s in Lab.Stock)
+  public long PartTwo()
   {
-    Console.WriteLine(s.Key + " : " + s.Value);  
-  }*/
-  //Console.WriteLine();
-  //Console.WriteLine();
-    //return Lab.MakeMostFuelWith(1000000000000);
-}
+    RunTestsPartTwo();
 
-//var grouped = results.Values.GroupBy(r => r, items = r.ToList());
-var availableOre = 1000000000000;
-int batchSize = (int) Math.Ceiling( (double) availableOre / (double) results.Values.Min());
+    var availableOre = 1000000000000;
+    Lab.Reset();
+    Lab.RecordReactionsInLabBook(Observations);
+    return Lab.MakeMostFuelWith(availableOre);
+  }
 
-     do{      
-      Lab.Stock.Clear();
-      long oreUsed = Lab.MakeChemical(Lab.FUEL, batchSize);
-      Console.WriteLine(oreUsed);
-      if ( oreUsed > availableOre )
-      {
-        return batchSize - 1;
-      }
-      batchSize ++;
-    }
-    while(true); 
-
-/*
-var grouped = results.GroupBy(u => u.Value)
-    .Select(grp =>  new{key = grp.Key, items = grp.ToList()})
-    .ToList();
-
-foreach(var g in grouped)
-{
-  Console.Write(g.key + " : ");
-  foreach(var i in g.items)
-    Console.Write(i.Key + ", ");
-  Console.WriteLine();
-  Console.WriteLine();
-
-}
-var results = Processor.Output
-.Where((x, i) => ((i + 1) % 3 == 0))
-.GroupBy
-(o => o, (key, x) => new { Key = key, Count = x.Count() });*/
-
-
-return 0;
-
-}
+  public long PartOne()
+  {
+    RunTestsPartOne();
+    Lab.Reset();
+    Lab.RecordReactionsInLabBook(Observations);
+    return Lab.MakeChemical("FUEL", 1);
+  }
 
 public void RunTestsPartTwo()
 {
-    var observations = @"10 ORE => 10 A
-1 ORE => 1 B
-7 A, 1 B => 1 C
-7 A, 1 C => 1 D
-7 A, 1 D => 1 E
-7 A, 1 E => 1 FUEL";
+    var observations = @"157 ORE => 5 NZVS
+165 ORE => 6 DCFZ
+44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL
+12 HKGWZ, 1 GPVTF, 8 PSHF => 9 QDVJ
+179 ORE => 7 PSHF
+177 ORE => 5 HKGWZ
+7 DCFZ, 7 PSHF => 2 XJWVT
+165 ORE => 2 GPVTF
+3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT";
 
-for(var i = 1; i < 100; i++)
-{
   Lab.Reset();
   Lab.RecordReactionsInLabBook(observations);
-  var oreUsed = Lab.MakeChemical("FUEL", i);
-  Console.WriteLine(oreUsed);
-  Console.WriteLine("Ore per Fuel (" + i + " fuel produced): " + oreUsed / i);
-  foreach(var s in Lab.Stock)
+  var ore = Lab.MakeMostFuelWith(1000000000000);
+  if(ore == 82892753)
   {
-    Console.WriteLine(s.Key + " : " + s.Value);  
+    Console.WriteLine("Day 14 part two test one passed");
   }
-  Console.WriteLine();
-  Console.WriteLine();
-    //return Lab.MakeMostFuelWith(1000000000000);
-}
+  else
+  {
+    throw new Exception("Failed day 14 part two test one. Should have been 82892753 was " + ore);
+  }
 
-/*    if(ore == 31)
-    {
-      Console.WriteLine("Day 14 part one test one passed");
-    }
-    else
-    {
-      throw new Exception("Failed day 14 part one test one. Should have been 31 was " + ore);
-    }*/  
 }
 
   public void RunTestsPartOne()

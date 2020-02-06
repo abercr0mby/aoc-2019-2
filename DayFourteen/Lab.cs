@@ -27,18 +27,34 @@ class Lab
 
   public static long MakeMostFuelWith(long availableOre)
   {
-    long batchSize = 5000000;
-    return MakeChemical(FUEL, batchSize);
-/*     do{
-      batchSize ++;
+    Dictionary<int, long> results = new Dictionary<int, long>(); 
+
+    // Get most efficient ore : fuel ratio.
+    for(var i = 1; i < 1000; i++)
+    {
       Stock.Clear();
-      long oreUsed = MakeChemical(FUEL, batchSize);
-      if ( oreUsed > availableOre )
+      var oreUsed = Lab.MakeChemical("FUEL", i);
+
+      results.Add(i, oreUsed / i);
+    }
+
+    // Best case batch size that *could* use a trill units.
+    int batchSize = (int) Math.Ceiling( (double) availableOre / (double) results.Values.Max());
+
+    Console.WriteLine("Batch Size: " + batchSize);
+
+    // Iterate until use more than a trill, then return previous
+    do
+    {      
+      Stock.Clear();
+      long oreUsed = Lab.MakeChemical(Lab.FUEL, batchSize);
+      if ( oreUsed >= availableOre )
       {
         return batchSize - 1;
       }
+      batchSize ++;
     }
-    while(true); */
+      while(true); 
   }
 
   public static void RecordReactionsInLabBook(string observations)

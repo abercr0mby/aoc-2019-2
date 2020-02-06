@@ -30,7 +30,7 @@ class Reaction
         return 0;
     }
 
-    var noOfReactions = (int) Math.Ceiling((double) quantityRequired / (double) OutputQuantity);
+    var noOfReactions = (long) Math.Ceiling((double) quantityRequired / (double) OutputQuantity);
     Lab.PlaceInStock(OutputChemical, (noOfReactions * OutputQuantity) - quantityRequired);
     
     foreach(var i in Inputs)
