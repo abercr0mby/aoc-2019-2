@@ -8,27 +8,17 @@ namespace aoc_2019
     {
       var previousDays = new PreviousDays();
       previousDays.Run();
-      try{
-        var dayFourteen = new DayFourteen();
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayFourteen.PartOne());
-        watch.Stop();
-        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
-      }
-      catch(Exception ex){
-        Console.WriteLine(ex.Message);
-      }
 
       try{
-        var dayFourteen = new DayFourteen();
+        var dayFifteen = new DayFifteen();
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        Console.WriteLine(dayFourteen.PartTwo());
+        Console.WriteLine(dayFifteen.PartOne());
         watch.Stop();
         Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
       }
       catch(Exception ex){
         Console.WriteLine(ex.Message);
-      }       
+      }
   
     }
   }

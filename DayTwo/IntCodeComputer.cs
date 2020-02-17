@@ -36,7 +36,7 @@ class IntCodeComputer
 
   public void SetInputSignal(long inputSignal)
   {
-    Inputs[1] = inputSignal;
+    Inputs[CurrentInput] = inputSignal;
   }
 
   public char [] GetParameterTypesFromOpCodeValue(string opCodeValue, string opCode)

@@ -102,7 +102,6 @@ public void RunTestsPartTwo()
   {
     throw new Exception("Failed day 14 part two test one. Should have been 82892753 was " + ore);
   }
-
 }
 
   public void RunTestsPartOne()
