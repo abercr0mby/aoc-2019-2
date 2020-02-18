@@ -11,7 +11,7 @@ public long[] Program = new long[] {2,380,379,385,1008,2389,754058,381,1005,381,
     var cab = new ArcadeCabinet();
     cab.LoadProgram(Program);
     cab.SetUpBoard();
-    cab.Play(true); 
+    cab.Play(false); 
     return 0;
   }
 

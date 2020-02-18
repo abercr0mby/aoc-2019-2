@@ -9,7 +9,7 @@ namespace aoc_2019
       var previousDays = new PreviousDays();
       previousDays.Run();
 
-      try{
+       try{
         var dayFifteen = new DayFifteen();
         var watch = System.Diagnostics.Stopwatch.StartNew();
         Console.WriteLine(dayFifteen.PartOne());

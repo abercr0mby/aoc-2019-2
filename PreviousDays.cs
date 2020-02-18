@@ -158,7 +158,7 @@ class PreviousDays
       }
       */
 
-      /*
+      
       try{
         var dayNine = new DayNine();
         var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -169,7 +169,7 @@ class PreviousDays
       catch(Exception ex){
         Console.WriteLine(ex.Message);
       }
-      */
+      
 
       /*
       try{
@@ -220,10 +220,7 @@ class PreviousDays
         Console.WriteLine(ex.Message);
       } 
       */
-
-      /*
-      var previousDays = new PreviousDays();
-      previousDays.Run();
+/*
       try{
         var dayThirteen = new DayThirteen();
         var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -233,8 +230,8 @@ class PreviousDays
       }
       catch(Exception ex){
         Console.WriteLine(ex.Message);
-      } */
-
+      }
+*/
 /*
       try{
         var dayFourteen = new DayFourteen();

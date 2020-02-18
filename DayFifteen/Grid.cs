@@ -59,25 +59,33 @@ class Grid
 
   public void Render()
   {
-  var width = Tiles.Max(t => t.Key.Item1);
-  var height = Tiles.Max(t => t.Key.Item2);
+  var xStart = Tiles.Min(t => t.Key.Item1);  
+  var xEnd = Tiles.Max(t => t.Key.Item1);
+  var yStart = Tiles.Min(t => t.Key.Item2);
+  var yEnd = Tiles.Max(t => t.Key.Item2);
   var pixel = ' ';
 
-  for(var i = 0; i < height; i++)
+  for(var i = yStart; i <= yEnd; i++)
   {
-    for(var j = 0; j < width; j++)
+    for(var j = xStart; j <= xEnd; j++)
     {
-      Console.WriteLine(i + " - " + j);
-
       Tile t;
-      Tiles.TryGetValue(Tuple.Create(i,j), out t);
+      Tiles.TryGetValue(Tuple.Create(j,i), out t);
       if(t == null)
       {
         pixel = '?';
       }
-      pixel = t.Status == Statuses[0] ? '?' : t.Status == Statuses[1] ? 'X' : t.Status == Statuses[2] ? 'F' : t.Status == Statuses[3] ? '#' : '!';      
-      Console.Write(pixel);      
+      else if(t.XPosition == 0 && t.YPosition == 0)
+      {
+        pixel = '+';
+      }
+      else
+      {
+        pixel =  t.Status == Statuses[0] ? '?' : t.Status == Statuses[1] ? 'V' : t.Status == Statuses[2] ? ' ' : t.Status == Statuses[3] ? '#' : 'O';      
+      }
+      Console.Write(" " + pixel + " ");      
     }
+    Console.WriteLine();
   }
   Console.WriteLine();
   Console.WriteLine();

@@ -15,7 +15,7 @@ class Roomba
   {
     Grid = grid;
     CurrentTile = Grid.GetOrCreateTileAt(x, y);
-    Brain = new IntCodeComputer(program, new long[] {0,0}, true, true);
+    Brain = new IntCodeComputer(program, new long[] {0}, true, false);
   }
 
   public int FindTileWithStatus(string status)
@@ -30,17 +30,19 @@ class Roomba
       if(CurrentTile.Status == Grid.Statuses[4])
         distanceToTile = CurrentTile.DistanceFromOrigin;
 
-      nextTile = neighbours.FirstOrDefault(x => x.Value.Status.Equals(Grid.Statuses[1]));
-
-      if(nextTile.Value == null)
-        nextTile = neighbours.FirstOrDefault(x => x.Value.Status.Equals(Grid.Statuses[0]));
+      nextTile = neighbours.FirstOrDefault(x => x.Value.Status.Equals(Grid.Statuses[0]));
 
       if(nextTile.Value == null)
       {
-        CurrentTile.Status = Grid.Statuses[2];
-        break;
+        if(neighbours.Count(x => x.Value.Status.Equals(Grid.Statuses[1])) == 1 && CurrentTile.Status != Grid.Statuses[4])
+          CurrentTile.Status = Grid.Statuses[2];
+
+        nextTile = neighbours.FirstOrDefault(x => x.Value.Status.Equals(Grid.Statuses[1]));
       }
-      
+
+      if(nextTile.Value == null)
+        break;
+
       MoveTo( nextTile );
 
     } while( true );
@@ -73,7 +75,7 @@ class Roomba
       tile.Value.Status = Grid.Statuses[1];
     }
 
-    if(tile.Value.DistanceFromOrigin > 0 && CurrentTile.DistanceFromOrigin + 1 < tile.Value.DistanceFromOrigin)
+    if(tile.Value.DistanceFromOrigin == 0 || CurrentTile.DistanceFromOrigin + 1 < tile.Value.DistanceFromOrigin)
       tile.Value.DistanceFromOrigin = CurrentTile.DistanceFromOrigin + 1;
     
     CurrentTile = tile.Value;
