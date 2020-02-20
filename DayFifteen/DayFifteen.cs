@@ -19,12 +19,9 @@ class DayFifteen
     var grid = new Grid();
     var roomba = grid.AddRoomba(0, 0, program);
     var result = roomba.FindTileWithStatus(Grid.Statuses[4]);
-    var o2Supply = roomba.CurrentTile;
-    
-    grid = new Grid();
-    roomba = grid.AddRoomba(o2Supply.XPosition, o2Supply.YPosition, program);
+    var o2Supply = grid.GetO2Supply();
 
-    return result;
+    return grid.ProgressOxygen(o2Supply) - 1;
   }  
 
 }

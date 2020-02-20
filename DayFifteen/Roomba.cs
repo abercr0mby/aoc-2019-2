@@ -20,14 +20,14 @@ class Roomba
 
   public int FindTileWithStatus(string status)
   {
-    var distanceToTile = 0;
+    var distanceToTile = 0;    
 
     do
     {
       var neighbours = Grid.GetNeighbours(CurrentTile);      
       KeyValuePair<int, Tile> nextTile;
 
-      if(CurrentTile.Status == Grid.Statuses[4])
+      if(CurrentTile.Status == status)
         distanceToTile = CurrentTile.DistanceFromOrigin;
 
       nextTile = neighbours.FirstOrDefault(x => x.Value.Status.Equals(Grid.Statuses[0]));

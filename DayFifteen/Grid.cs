@@ -15,6 +15,39 @@ class Grid
     Tiles = new Dictionary<Tuple<int, int>, Tile>();
   }
 
+
+  public int ProgressOxygen(Tile start)
+  {
+    var maxDepth = 0;
+    start.Status = Statuses[4];
+
+    var tiles = GetNeighbours(start).Where(t => t.Value.Status != Statuses[3] && t.Value.Status != Statuses[4]).ToList();
+
+    if(tiles.Count == 0)
+    {
+      return 1;
+    }
+
+    foreach(var tile in tiles)
+    {
+      var depth = ProgressOxygen(tile.Value) + 1;
+      if(depth > maxDepth)
+        maxDepth = depth;
+    }
+    return maxDepth;
+  }
+
+  public int GetFurthestTileFromRoombaStart()
+  {
+    return Tiles.Max(t => t.Value.DistanceFromOrigin);
+  }
+
+  public Tile GetO2Supply()
+  {
+    return Tiles.FirstOrDefault(t => t.Value.Status == Statuses[4]).Value;
+  }
+
+
   public Roomba AddRoomba(int x, int y, long[] program)
   {
     Roomba = new Roomba(this, x, y, program);
