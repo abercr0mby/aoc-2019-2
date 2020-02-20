@@ -158,7 +158,7 @@ class PreviousDays
       }
       */
 
-      
+      /*
       try{
         var dayNine = new DayNine();
         var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -169,6 +169,7 @@ class PreviousDays
       catch(Exception ex){
         Console.WriteLine(ex.Message);
       }
+      */
       
 
       /*
@@ -255,5 +256,28 @@ class PreviousDays
         Console.WriteLine(ex.Message);
       }             
 */
+
+      /*try{
+        var dayFifteen = new DayFifteen();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Console.WriteLine(dayFifteen.PartOne());
+        watch.Stop();
+        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
+      }
+      catch(Exception ex){
+        Console.WriteLine(ex.Message);
+      } 
+
+       try{
+        var dayFifteen = new DayFifteen();
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        Console.WriteLine(dayFifteen.PartTwo());
+        watch.Stop();
+        Console.WriteLine("Time:" + watch.ElapsedMilliseconds);
+      }
+      catch(Exception ex){
+        Console.WriteLine(ex.Message);
+      } 
+      */
   }
 }
