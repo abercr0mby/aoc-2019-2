@@ -11,35 +11,57 @@ class Fft
     BasePattern = new int[] {0, 1, 0, -1};
   }
 
+  public string CleanUpWithOffSet(string inputString, int iterations, int offset)
+  {
+    var skipIt = Int32.Parse(string.Join("", inputString.Take(offset)));
+    var result = CleanUp(inputString, iterations);
+
+    return result.Skip(skipIt).Take(8).ToString();
+  }
+
   public string CleanUp(string inputString, int iterations)
   {
     //int[] input = inputString.Select(i => Int32.TryParse(i, out x));
     int[] input = Array.ConvertAll(inputString.ToCharArray(), s => int.Parse(s.ToString()));
     var output = new int[input.Length];
 
+    var newInput = new int[input.Length];
+
     for(int x = 0; x < iterations; x++)
     {
       for(int i = 0; i < output.Length; i++)
       {
-        for(int j = 0; j < BasePattern.Length; j++)
+        var inputIndex = -1;
+        do
         {
-          for(int k = 0; k <= i; k++)
+          for(int j = 0; j < BasePattern.Length; j++)
           {
-            if(j == 0 && k == 0)
-              continue;
+            for(int k = 0; k <= i; k++)
+            {
+              if(inputIndex == -1)
+              {
+                inputIndex ++;
+                continue;
+              }
 
-            var inputIndex = ( i * BasePattern.Length ) + k ;
+              newInput[inputIndex] = (input[inputIndex] * BasePattern[j]);
+              inputIndex ++;
+
+              if(inputIndex >= input.Length)
+                break;            
+            }
             if(inputIndex >= input.Length)
-              break;
-
-            input[inputIndex] = (input[inputIndex] * BasePattern[j]);
-            
+              break;           
           }
+          if(inputIndex >= input.Length)
+            break;           
         }
-        output[i] = input.Sum() % 10;
+        while(true);
+
+        output[i] = Math.Abs(newInput.Sum() % 10);
       }
       input = output;
-    }
+    }    
 
     return string.Join("", output.Take(8));
 
